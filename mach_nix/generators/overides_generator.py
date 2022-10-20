@@ -87,10 +87,8 @@ class OverridesGenerator(ExpressionGenerator):
                 else
                   filter
                     (dep:
-                      if ! isPyModule dep || pkgsData ? "${{normalizeName (get_pname dep)}}" then
-                        true
-                      else
-                        trace "removing dependency ${{dep.name}} from ${{pname}}" false)
+                      isPyModule dep || pkgsData ? "${{normalizeName (get_pname dep)}}"
+                    )
                     inputs;
               updatePythonDeps = newPkgs: pkg:
                 if ! isPyModule pkg then pkg else
